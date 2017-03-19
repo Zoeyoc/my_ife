@@ -96,7 +96,9 @@ function showQueue(queue) {
                 que[j].id = k++; 
             }
         }
-        childDiv.style.cssText = 'display:inline; height:50px; margin:5px; background:red';
+        childDiv.style.cssText = "background:red;position:absolute;bottom:0;left:" + 20*i + "px;height:"+ 5*queue[i] + "px;width:20px";
+
+
         div.appendChild(childDiv);
     }
 }
