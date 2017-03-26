@@ -5,17 +5,18 @@
 	<title>Document</title>
 	<style>
 		.button {
-			width: 50px;
+			width: 70px;
 			margin: 3px;
 
 		}
 		#queue {
-			height: 500px;
-			width: 1200px;
-			overflow: hidden;
-			position: relative;
-			margin: 0 auto;
-/*			background: red;
+			 display: :flex;
+        	display: -webkit-flex; /* Safari*/
+        	align-items: flex-end;
+        	/*align-content: center;*/
+        	height: 500px;
+        	width: 1200px;
+        	margin: 0 auto;
 */		}
 		body {
 			text-align: center;
@@ -28,6 +29,9 @@
 	<input class="button" type="button" id="rightIn" value="右侧入">
 	<input  class="button" type="button" id="leftOut" value="左侧出">
 	<input class="button" type="button" id="rightOut" value="右侧出">
+	<input class="button" type="button" id="random" value="随机生成">
+	
+	<input class="button" type="button" id="bubSort" value="冒泡排序">
 	<div id="queue"></div>
 	<script src="js/js_task005.js"></script>
 </body>

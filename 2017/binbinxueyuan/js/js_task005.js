@@ -73,6 +73,65 @@ function IsNumber(input) {
         return false; 
       } 
 }
+function addEventHandler(ele, event, hanlder) {
+    if (ele.addEventListener) {
+        ele.addEventListener(event, hanlder, false);
+    } else if (ele.attachEvent) {
+        ele.attachEvent("on"+event, hanlder);
+    } else  {
+        ele["on" + event] = hanlder;
+    }
+}
+function randomNum() {
+  q.dataStore = [];
+  var key;
+  for(var i=0;i<30;i++){
+    key = parseInt(Math.random()*90+10);
+    q.lIn(key);
+    
+  }
+  showQueue(q.dataStore);
+}
+function swap(ele1, ele2) {
+    var temp1 = ele1.style.height;
+    var temp2 = ele1.innerHTML;
+    var temp3 = ele1.id;
+   
+    ele1.style.height = ele2.style.height;
+    ele1.innerHTML = ele2.innerHTML;
+    ele1.id = ele2.id;
+    ele2.style.height = temp1;
+    ele2.innerHTML = temp2;
+    ele2.id = temp3;
+
+    // 如果只是相邻元素swap，可以使用下面这个方法直接交换dom元素
+    // 但是考虑到非冒泡排序算法使用swap时不一定是交换相邻元素(比
+    // 如插入排序)，所以使用交换高度的方法。注意ele.style.height
+    // 和ele.offsetHeight都需要互换
+
+    // ele1.parentNode.insertBefore(ele2, ele1);
+};
+function bubbleSort(arr) {
+      var len = arr.length;
+      var i = 0,j = 0;
+      timer = setInterval(function() {
+        if (i == len) {
+            clearInterval(timer);
+        }
+        if(j == len - 1 - i) {
+            i ++;
+            j = 0;
+        }
+        if(arr[j].innerHTML>arr[j+1].innerHTML){
+          swap(arr[j],arr[j+1]);
+        }
+        j ++;
+      },100);
+        
+
+}
+
+
 function showQueue(queue) {
     var div = document.getElementById("queue");
          while(div.hasChildNodes()) //当div下还存在子节点时 循环继续
@@ -86,8 +145,7 @@ function showQueue(queue) {
         childDiv.className = 'q';
         childDiv.innerHTML = queue[i];
         childDiv.onclick = function(){
-            var div = document.getElementById("queue");
-            var que = document.getElementsByClassName("q");
+            
             console.log(que);
             q.del(this.id);
             div.removeChild(this);
@@ -96,19 +154,22 @@ function showQueue(queue) {
                 que[j].id = k++; 
             }
         }
-        childDiv.style.cssText = "background:red;position:absolute;bottom:0;left:" + 20*i + "px;height:"+ 5*queue[i] + "px;width:20px";
+        childDiv.style.cssText = "background:red;height:"+ 5*queue[i] + "px;border:1px solid black;";
 
 
         div.appendChild(childDiv);
     }
 }
-var q = new Queue();
-
+q = new Queue();
+var div = document.getElementById("queue");
+var que = document.getElementsByClassName("q");
 window.onload = function() {
     var leftIn = document.getElementById("leftIn");
     var rightIn = document.getElementById("rightIn");
     var leftOut = document.getElementById("leftOut");
     var rightOut = document.getElementById("rightOut");
+    var random = document.getElementById("random");
+    var bubSort = document.getElementById("bubSort");
     leftIn.onclick = function() {
         var key = document.getElementById("key").value;
         if(IsNotEmpty(key)&&IsNumber(key)){
@@ -142,7 +203,12 @@ window.onload = function() {
         showQueue(q.dataStore);
 
     }
-
+    addEventHandler(random,'click',randomNum);
+    addEventHandler(bubSort,'click',function(){
+      bubbleSort(que);
+      console.log(que[0].style.height);
+    }
+      );
 }
 
 
