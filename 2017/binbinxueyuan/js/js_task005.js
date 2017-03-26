@@ -1,37 +1,53 @@
-/*--------------Queue类的定义和测试代码----------------*/
-function Queue(){
-        this.dataStore = [];
-        this.lIn = lIn;
-        this.rIn = rIn;
-        this.lOut = lOut;
-        this.rOut = rOut;
-        this.empty = empty;
-        this.del = del;
+function addEventHandler(ele, event, hanlder) {
+    if (ele.addEventListener) {
+        ele.addEventListener(event, hanlder, false);
+    } else if (ele.attachEvent) {
+        ele.attachEvent("on"+event, hanlder);
+    } else  {
+        ele["on" + event] = hanlder;
+    }
 }
 
 //队首入
 function lIn(element){
-    if (this.dataStore.length<60) {
-        this.dataStore.unshift(element);
+     var newEle = document.createElement("div");
+    if (que.length<60) {
+        newEle.style.height = element*4 +"px";
+        newEle.innerHTML = element;
+        newEle.setAttribute('class','q');
+        div.insertBefore(newEle,que[0]);
+        addEventHandler(newEle,'click',function() {removeEle(newEle)});
+
     }else{
         alert("元素不能超过60个！")
-    }
+}
 }
 //队末入
 function rIn(element){
-    if (this.dataStore.length<60) {
-         this.dataStore.push(element);
+    var newEle = document.createElement("div");
+    if (que.length<60) {
+        newEle.style.height = element*4 +"px";
+        newEle.innerHTML = element;
+        newEle.setAttribute('class','q');
+        div.appendChild(newEle);
     }else{
         alert("元素不能超过60个！")
     }
 }
+function removeEle(ele) {
+  div.removeChild(ele);
+}
 //队首出
 function lOut(){
-    return this.dataStore.shift();
+    first = div.firstChild;
+    alert(first.innerHTML);
+    div.removeChild(first);
 }
 //队末出
 function rOut(){
-    return this.dataStore.pop();
+    last = div.lastChild;
+    alert(last.innerHTML);
+    div.removeChild(last);
 }
 
 function del(id) {
@@ -73,36 +89,29 @@ function IsNumber(input) {
         return false; 
       } 
 }
-function addEventHandler(ele, event, hanlder) {
-    if (ele.addEventListener) {
-        ele.addEventListener(event, hanlder, false);
-    } else if (ele.attachEvent) {
-        ele.attachEvent("on"+event, hanlder);
-    } else  {
-        ele["on" + event] = hanlder;
-    }
-}
+
 function randomNum() {
-  q.dataStore = [];
+   var div = document.getElementById("queue");
+    while(div.hasChildNodes()) //当div下还存在子节点时 循环继续
+    {
+        div.removeChild(div.firstChild);
+        }
   var key;
   for(var i=0;i<30;i++){
     key = parseInt(Math.random()*90+10);
-    q.lIn(key);
+    lIn(key);
     
   }
-  showQueue(q.dataStore);
 }
 function swap(ele1, ele2) {
     var temp1 = ele1.style.height;
     var temp2 = ele1.innerHTML;
-    var temp3 = ele1.id;
    
     ele1.style.height = ele2.style.height;
     ele1.innerHTML = ele2.innerHTML;
-    ele1.id = ele2.id;
     ele2.style.height = temp1;
     ele2.innerHTML = temp2;
-    ele2.id = temp3;
+
 
     // 如果只是相邻元素swap，可以使用下面这个方法直接交换dom元素
     // 但是考虑到非冒泡排序算法使用swap时不一定是交换相邻元素(比
@@ -111,12 +120,15 @@ function swap(ele1, ele2) {
 
     // ele1.parentNode.insertBefore(ele2, ele1);
 };
-function bubbleSort(arr) {
+function bubbleSort() {
+      var arr = document.getElementsByClassName("q");
+
       var len = arr.length;
       var i = 0,j = 0;
       timer = setInterval(function() {
-        if (i == len) {
+        if (i == len ) {
             clearInterval(timer);
+            return;
         }
         if(j == len - 1 - i) {
             i ++;
@@ -124,6 +136,7 @@ function bubbleSort(arr) {
         }
         if(arr[j].innerHTML>arr[j+1].innerHTML){
           swap(arr[j],arr[j+1]);
+          console.log(arr[j+1].innerHTML);
         }
         j ++;
       },100);
@@ -131,84 +144,44 @@ function bubbleSort(arr) {
 
 }
 
-
-function showQueue(queue) {
-    var div = document.getElementById("queue");
-         while(div.hasChildNodes()) //当div下还存在子节点时 循环继续
-        {
-        div.removeChild(div.firstChild);
-        }
-    for(i=0;i<queue.length;i++){
-
-        var childDiv = document.createElement('div');
-        childDiv.id = i;
-        childDiv.className = 'q';
-        childDiv.innerHTML = queue[i];
-        childDiv.onclick = function(){
-            
-            console.log(que);
-            q.del(this.id);
-            div.removeChild(this);
-            k = 0;
-            for(j=0;j<que.length;j++){
-                que[j].id = k++; 
-            }
-        }
-        childDiv.style.cssText = "background:red;height:"+ 5*queue[i] + "px;border:1px solid black;";
-
-
-        div.appendChild(childDiv);
-    }
-}
-q = new Queue();
 var div = document.getElementById("queue");
 var que = document.getElementsByClassName("q");
-window.onload = function() {
-    var leftIn = document.getElementById("leftIn");
-    var rightIn = document.getElementById("rightIn");
-    var leftOut = document.getElementById("leftOut");
-    var rightOut = document.getElementById("rightOut");
-    var random = document.getElementById("random");
-    var bubSort = document.getElementById("bubSort");
+var leftIn = document.getElementById("leftIn");
+var rightIn = document.getElementById("rightIn");
+var leftOut = document.getElementById("leftOut");
+var rightOut = document.getElementById("rightOut");
+var random = document.getElementById("random");
+var bubSort = document.getElementById("bubSort");
     leftIn.onclick = function() {
         var key = document.getElementById("key").value;
         if(IsNotEmpty(key)&&IsNumber(key)){
              key = parseFloat(key);
              // console.log(key);
-             q.lIn(key);
-             console.log(q.dataStore);
-             showQueue(q.dataStore);
+             lIn(key);
+             
          }
     }
     rightIn.onclick = function() {
         var key = document.getElementById("key").value;
         if(IsNotEmpty(key)&&IsNumber(key)){
              key = parseFloat(key);
-             // console.log(key);
-             q.rIn(key);
-             showQueue(q.dataStore);
-
-             console.log(q.dataStore);
+             rIn(key);       
          }
     }
     leftOut.onclick = function() {
-        alert(q.lOut());
-        console.log(q.dataStore);
-        showQueue(q.dataStore);
+        lOut();
 
     }
     rightOut.onclick = function() {
-        alert(q.rOut());
-        console.log(q.dataStore);
-        showQueue(q.dataStore);
-
+        rOut();
     }
     addEventHandler(random,'click',randomNum);
     addEventHandler(bubSort,'click',function(){
-      bubbleSort(que);
-      console.log(que[0].style.height);
+      bubbleSort();
+      // console.log(que[0].style.height);
     }
       );
-}
+
+
 
 
