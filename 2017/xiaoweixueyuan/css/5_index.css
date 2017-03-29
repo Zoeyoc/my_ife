@@ -1,0 +1,118 @@
+@charset "utf-8";
+body {
+	background-color: #DEDEDE;
+}
+.top {
+	background-color: #333;
+	height: 60px;
+}
+
+.logo img {
+	width: 30px;
+	height: 30px;
+	padding: 15px 0 0 20px;
+}
+.mainNav ul {
+	margin: 0 auto;
+}
+.mainNav ul li  {
+    float: left;
+	line-height: 60px;
+	padding-right: 30px;
+}
+.mainNav ul li a {
+	text-decoration:none;
+	color: #fff;
+}
+#main {
+	overflow: auto;
+}
+#left {
+	float: left;
+	width: 100%;
+}
+#left #content {
+	margin-right: 500px;
+}
+article {
+	border: 1px solid #CDCDCD;
+	background-color: #fff;
+/*    width: 1400px;*/
+    margin: 30px;
+    padding: 15px;
+    overflow: auto;
+}
+.list {
+	list-style: none;
+}
+article p {
+	text-indent: 2em;
+}
+article figure {
+	border: 1px solid #CDCDCD;
+	width: 200px;
+	text-align: center;
+	float: left;
+}
+article img {
+	width: 100px;
+	height: 100px;
+}
+table {
+	border-collapse:collapse;
+	width: 100%;
+}
+table thead {
+	background-color: #333;
+	color: #fff;
+	text-align: left;
+}
+table tfoot {
+	background-color: #CCC;
+}
+#right {
+	float: left;
+	margin-left: -500px;
+}
+aside {
+	border: 1px solid #CDCDCD;
+	background-color: #fff;
+    width: 400px;
+    margin: 30px;
+    padding: 15px;
+}
+form div {
+	margin:10px;
+}
+form label{
+	display: inline-block;
+	width: 40%;
+	text-align: right;
+	vertical-align: top;
+
+}
+form p {
+	margin-left:40%; 
+	font-size: 13px;
+	color: #B3B0A9;
+}
+form textarea {
+	width: 200px;
+}
+form #submit {
+	width: 100%;
+	background: #3355D0;
+	border-radius: 5px;
+	height: 40px;
+	color: #fff;
+	font-size: 20px;
+}
+footer {
+	background-color: #333;
+	height: 60px;
+	text-align: center;
+}
+footer span {
+	color: #fff;
+	line-height: 60px;
+}

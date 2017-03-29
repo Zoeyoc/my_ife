@@ -10,6 +10,7 @@ function addEventHandler(ele, event, hanlder) {
 
 //队首入
 function lIn(element){
+    newRandom = true;
      var newEle = document.createElement("div");
     if (que.length<60) {
         newEle.style.height = element*4 +"px";
@@ -24,6 +25,7 @@ function lIn(element){
 }
 //队末入
 function rIn(element){
+      newRandom = true;
     var newEle = document.createElement("div");
     if (que.length<60) {
         newEle.style.height = element*4 +"px";
@@ -90,7 +92,9 @@ function IsNumber(input) {
       } 
 }
 
+var newRandom;
 function randomNum() {
+   newRandom = true;
    var div = document.getElementById("queue");
     while(div.hasChildNodes()) //当div下还存在子节点时 循环继续
     {
@@ -121,26 +125,48 @@ function swap(ele1, ele2) {
     // ele1.parentNode.insertBefore(ele2, ele1);
 };
 function bubbleSort() {
+      if(newRandom == true){
+
+        newRandom = false;
       var arr = document.getElementsByClassName("q");
 
       var len = arr.length;
       var i = 0,j = 0;
       timer = setInterval(function() {
-        if (i == len ) {
-            clearInterval(timer);
-            return;
-        }
+        if(newRandom == false){
+        // if(j != 0){
+        // arr[j-1].style.background = "red";
+        // }
+        // // arr[j].style.background = "green";
+        // if(j != len){
+        //   arr[j+1].style.background = "green";
+        // }
+        
+
+        
         if(j == len - 1 - i) {
             i ++;
             j = 0;
+
         }
-        if(arr[j].innerHTML>arr[j+1].innerHTML){
+        if (i == len-1 ) {
+            clearInterval(timer);
+            return;
+        }else if(arr[j].innerHTML>arr[j+1].innerHTML){
+          
           swap(arr[j],arr[j+1]);
-          console.log(arr[j+1].innerHTML);
+
+          // console.log(arr[j+1].innerHTML);
         }
         j ++;
-      },100);
         
+      }else {
+          i = 0;
+          j = 0;
+          return;
+        }
+      },100);
+    }  
 
 }
 
@@ -176,11 +202,7 @@ var bubSort = document.getElementById("bubSort");
         rOut();
     }
     addEventHandler(random,'click',randomNum);
-    addEventHandler(bubSort,'click',function(){
-      bubbleSort();
-      // console.log(que[0].style.height);
-    }
-      );
+    addEventHandler(bubSort,'click',bubbleSort);
 
 
 

@@ -1,0 +1,11 @@
+#login {
+	background: pink;
+	width: 350px;
+	height: 250px;
+	z-index: 99999;
+	border: 1px solid black;
+}
+#login #title {
+	border: 1px solid black;
+
+}
