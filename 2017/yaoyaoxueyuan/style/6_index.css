@@ -1,11 +1,28 @@
+
+body {
+	height: 1000px;
+}
+header {
+	height: 100px;
+	background: blue;
+}
+#loginButton {
+	margin: 10px;
+	width: 100px;
+}
 #login {
 	background: pink;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
 	width: 350px;
 	height: 250px;
 	z-index: 99999;
 	border: 1px solid black;
+
 }
 #login #title {
 	border: 1px solid black;
-
+	cursor: move;
 }
