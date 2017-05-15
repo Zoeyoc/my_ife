@@ -52,13 +52,6 @@ function query() {
   //消除之前的查询
   var span1 = "<span>";
   var span2 = "</span>";
-  // for(i = 0;i<queryArr.length;i++) {
-  //     var ele = queryArr[i].innerHTML;
-  //     console.log(ele);
-  //     ele = ele.replace(new RegExp(span1,"g"),"");
-  //     ele = ele.replace(new RegExp(span2,"g"),"");
-  //     queryArr[i].innerHTML = ele;
-  //   }
   var keyword = $('#query-text').value;
   if(keyword!=null){
     for(i = 0;i<queryArr.length;i++) {

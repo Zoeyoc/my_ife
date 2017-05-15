@@ -52,18 +52,6 @@ function rOut(){
     div.removeChild(last);
 }
 
-function del(id) {
-    return this.dataStore.splice(id,1);
-}
-//判断数组是否为空
-function empty(){
-    if(this.dataStore.length == 0){
-        return true;
-    }else{
-        return false;
-    }    
-}
-
 function IsNotEmpty(input) { 
       if (input != '') { 
         return true; 
@@ -126,37 +114,21 @@ function swap(ele1, ele2) {
 };
 function bubbleSort() {
       if(newRandom == true){
-
         newRandom = false;
       var arr = document.getElementsByClassName("q");
-
       var len = arr.length;
       var i = 0,j = 0;
       timer = setInterval(function() {
         if(newRandom == false){
-        // if(j != 0){
-        // arr[j-1].style.background = "red";
-        // }
-        // // arr[j].style.background = "green";
-        // if(j != len){
-        //   arr[j+1].style.background = "green";
-        // }
-        
-
-        
         if(j == len - 1 - i) {
             i ++;
             j = 0;
-
         }
         if (i == len-1 ) {
             clearInterval(timer);
             return;
-        }else if(arr[j].innerHTML>arr[j+1].innerHTML){
-          
+        }else if(arr[j].innerHTML>arr[j+1].innerHTML){         
           swap(arr[j],arr[j+1]);
-
-          // console.log(arr[j+1].innerHTML);
         }
         j ++;
         
@@ -167,7 +139,76 @@ function bubbleSort() {
         }
       },100);
     }  
+}
 
+function selectionSort() {
+  if(newRandom == true){
+      newRandom = false;
+
+      var arr = document.getElementsByClassName("q");
+      var len = arr.length;
+      var i = 0,j = 1;
+      console.log(j);
+      var minIndex = i;
+      timer = setInterval(function() {
+        if(newRandom == false){
+          if(i !=arr.length){
+            
+            if(j != arr.length){
+              if(arr[j].innerHTML<arr[minIndex].innerHTML)
+                 minIndex = j;
+                 j++;
+
+              }else {
+                   swap(arr[minIndex],arr[i]);
+                   i++;
+                   j = i + 1;
+                   minIndex = i;
+              }
+        }else {
+          clearInterval(timer);
+            return;
+        }  
+      }else {
+          i = 0;
+          j = 1;
+          return;
+        }
+      },100);
+    }  
+}
+
+function insertionSort() {
+      if(newRandom == true){
+        newRandom = false;
+      var arr = document.getElementsByClassName("q");
+      var len = arr.length;
+      var i = 1,j = 0;
+      // console.log(j);
+      var key = arr[i];
+      timer = setInterval(function() {
+        if(newRandom == false){
+          if(i != len) {
+            if((j>=0)&&(arr[j].innerHTML>key.innerHTML)){
+              swap(arr[j+1],arr[j]);
+              j--;
+            }else {
+              swap(arr[j+1],key);
+              i ++;
+              key = arr[i];
+              j = i-1;
+            }
+          }else {
+            clearInterval(timer);
+          }
+        
+      }else {
+          i = 1;
+          j = 0;
+          return;
+        }
+      },100000);
+    }  
 }
 
 var div = document.getElementById("queue");
@@ -178,6 +219,8 @@ var leftOut = document.getElementById("leftOut");
 var rightOut = document.getElementById("rightOut");
 var random = document.getElementById("random");
 var bubSort = document.getElementById("bubSort");
+var selectSort = document.getElementById("selectionSort");
+var insertSort = document.getElementById("insertionSort");
     leftIn.onclick = function() {
         var key = document.getElementById("key").value;
         if(IsNotEmpty(key)&&IsNumber(key)){
@@ -203,6 +246,8 @@ var bubSort = document.getElementById("bubSort");
     }
     addEventHandler(random,'click',randomNum);
     addEventHandler(bubSort,'click',bubbleSort);
+    addEventHandler(selectSort,'click',selectionSort);
+    addEventHandler(insertSort,'click',insertionSort);
 
 
 
